@@ -1,14 +1,16 @@
 namespace LcdDigits
 {
+    using System;
     using FluentAssertions;
     using Xunit;
 
     public class LcdDigitsUnitTests
     {
-        [Fact]
-        public void Test1()
+        [Fact(DisplayName = "Given negative number, should throw argument exception")]
+        public void GivenNegativeNumber_ShouldThrowArgumentException()
         {
-            new LcdDigits().Should().NotBeNull();
+            Action act = () => LcdDigits.Output(-1);
+            act.Should().Throw<ArgumentException>();
         }
     }
 }
