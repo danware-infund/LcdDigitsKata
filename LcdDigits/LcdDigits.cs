@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Text;
 
     public class LcdDigits
     {
@@ -59,14 +60,26 @@
             },
         };
 
-        public static string Output(int number)
+        public static string Output(int numberToDisplay)
         {
-            if (number < 0)
+            if (numberToDisplay < 0)
+                throw new ArgumentException($"{nameof(numberToDisplay)} cannot be less than zero");
+
+            var wholeNumber = numberToDisplay.ToString();
+            var output = new StringBuilder();
+
+            for (int line = 0; line < 3; line++)
             {
-                throw new ArgumentException($"{nameof(number)} cannot be less than zero");
+                for (int number = 0; number < wholeNumber.Length; number++)
+                {
+                    var currentValue = Convert.ToInt32(char.GetNumericValue(wholeNumber[number]));
+                    output.Append(Pattern[currentValue][line]);
+                }
+
+                if (line < 2) output.Append(Environment.NewLine);
             }
 
-            return string.Join(Environment.NewLine, Pattern[number]);
+            return output.ToString();
         }
     }
 }
