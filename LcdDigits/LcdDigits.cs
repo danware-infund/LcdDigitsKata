@@ -4,7 +4,15 @@
 
     public class LcdDigits
     {
-        public const string ZERO_PATTERN = "._.\n|.|\n|_|";
+        public static readonly string PATTERN_FOR_0 =
+          "._." + Environment.NewLine +
+          "|.|" + Environment.NewLine +
+          "|_|";
+
+        public static readonly string PATTERN_FOR_1 =
+          "..." + Environment.NewLine +
+          "..|" + Environment.NewLine +
+          "..|";
 
         public static string Output(int number)
         {
@@ -13,7 +21,14 @@
                 throw new ArgumentException($"{nameof(number)} cannot be less than zero");
             }
 
-            return ZERO_PATTERN;
+            if (number == 1)
+            {
+                return PATTERN_FOR_1;
+            }
+            else
+            {
+                return PATTERN_FOR_0;
+            }
         }
     }
 }
